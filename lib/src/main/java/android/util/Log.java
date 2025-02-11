@@ -16,18 +16,18 @@
 
 package android.util;
 
-import android.annotation.IntDef;
-import android.annotation.NonNull;
-import android.annotation.Nullable;
-import android.annotation.SystemApi;
-import android.compat.annotation.UnsupportedAppUsage;
-import android.os.DeadSystemException;
+//import android.annotation.IntDef;
+//import android.annotation.NonNull;
+//import android.annotation.Nullable;
+//import android.annotation.SystemApi;
+//import android.compat.annotation.UnsupportedAppUsage;
+//import android.os.DeadSystemException;
 
-import com.android.internal.os.RuntimeInit;
+//import com.android.internal.os.RuntimeInit;
 import com.android.internal.util.FastPrintWriter;
 import com.android.internal.util.LineBreakBufferedWriter;
 
-import dalvik.annotation.optimization.FastNative;
+//import dalvik.annotation.optimization.FastNative;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -71,15 +71,15 @@ import java.net.UnknownHostException;
  * releases due to changes in the logging implementation. For the methods that return an integer,
  * a positive value may be considered as a successful invocation.
  */
-@android.ravenwood.annotation.RavenwoodKeepWholeClass
-@android.ravenwood.annotation.RavenwoodClassLoadHook(
-        "com.android.platform.test.ravenwood.runtimehelper.ClassLoadHook.onClassLoaded")
+//@android.ravenwood.annotation.RavenwoodKeepWholeClass
+//@android.ravenwood.annotation.RavenwoodClassLoadHook(
+//        "com.android.platform.test.ravenwood.runtimehelper.ClassLoadHook.onClassLoaded")
 // Uncomment the following annotation to switch to the Java substitution version.
 //@android.ravenwood.annotation.RavenwoodNativeSubstitutionClass(
 //        "com.android.platform.test.ravenwood.nativesubstitution.Log_host")
 public final class Log {
     /** @hide */
-    @IntDef({ASSERT, ERROR, WARN, INFO, DEBUG, VERBOSE})
+    //@IntDef({ASSERT, ERROR, WARN, INFO, DEBUG, VERBOSE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Level {}
 
@@ -132,7 +132,7 @@ public final class Log {
 
     private static TerribleFailureHandler sWtfHandler = new TerribleFailureHandler() {
             public void onTerribleFailure(String tag, TerribleFailure what, boolean system) {
-                RuntimeInit.wtf(tag, what, system);
+                //RuntimeInit.wtf(tag, what, system);
             }
         };
 
@@ -146,7 +146,8 @@ public final class Log {
      * @param msg The message you would like logged.
      * @return A positive value if the message was loggable (see {@link #isLoggable}).
      */
-    public static int v(@Nullable String tag, @NonNull String msg) {
+    public static int v(String tag, String msg) {
+    //public static int v(@Nullable String tag, @NonNull String msg) {
         return println_native(LOG_ID_MAIN, VERBOSE, tag, msg);
     }
 
@@ -158,7 +159,8 @@ public final class Log {
      * @param tr An exception to log.
      * @return A positive value if the message was loggable (see {@link #isLoggable}).
      */
-    public static int v(@Nullable String tag, @Nullable String msg, @Nullable Throwable tr) {
+    public static int v(String tag, String msg, Throwable tr) {
+    //public static int v(@Nullable String tag, @Nullable String msg, @Nullable Throwable tr) {
         return printlns(LOG_ID_MAIN, VERBOSE, tag, msg, tr);
     }
 
@@ -169,7 +171,8 @@ public final class Log {
      * @param msg The message you would like logged.
      * @return A positive value if the message was loggable (see {@link #isLoggable}).
      */
-    public static int d(@Nullable String tag, @NonNull String msg) {
+    public static int d(String tag, String msg) {
+    //public static int d(@Nullable String tag, @NonNull String msg) {
         return println_native(LOG_ID_MAIN, DEBUG, tag, msg);
     }
 
@@ -181,7 +184,8 @@ public final class Log {
      * @param tr An exception to log.
      * @return A positive value if the message was loggable (see {@link #isLoggable}).
      */
-    public static int d(@Nullable String tag, @Nullable String msg, @Nullable Throwable tr) {
+    public static int d(String tag, String msg, Throwable tr) {
+    //public static int d(@Nullable String tag, @Nullable String msg, @Nullable Throwable tr) {
         return printlns(LOG_ID_MAIN, DEBUG, tag, msg, tr);
     }
 
@@ -192,7 +196,8 @@ public final class Log {
      * @param msg The message you would like logged.
      * @return A positive value if the message was loggable (see {@link #isLoggable}).
      */
-    public static int i(@Nullable String tag, @NonNull String msg) {
+    public static int i(String tag, String msg) {
+    //public static int i(@Nullable String tag, @NonNull String msg) {
         return println_native(LOG_ID_MAIN, INFO, tag, msg);
     }
 
@@ -203,7 +208,8 @@ public final class Log {
      * @param msg The message you would like logged.
      * @param tr An exception to log.
      */
-    public static int i(@Nullable String tag, @Nullable String msg, @Nullable Throwable tr) {
+    public static int i(String tag, String msg, Throwable tr) {
+    //public static int i(@Nullable String tag, @Nullable String msg, @Nullable Throwable tr) {
         return printlns(LOG_ID_MAIN, INFO, tag, msg, tr);
     }
 
@@ -214,7 +220,8 @@ public final class Log {
      * @param msg The message you would like logged.
      * @return A positive value if the message was loggable (see {@link #isLoggable}).
      */
-    public static int w(@Nullable String tag, @NonNull String msg) {
+    public static int w(String tag, String msg) {
+    //public static int w(@Nullable String tag, @NonNull String msg) {
         return println_native(LOG_ID_MAIN, WARN, tag, msg);
     }
 
@@ -226,7 +233,8 @@ public final class Log {
      * @param tr An exception to log.
      * @return A positive value if the message was loggable (see {@link #isLoggable}).
      */
-    public static int w(@Nullable String tag, @Nullable String msg, @Nullable Throwable tr) {
+    public static int w(String tag, String msg, Throwable tr) {
+    //public static int w(@Nullable String tag, @Nullable String msg, @Nullable Throwable tr) {
         return printlns(LOG_ID_MAIN, WARN, tag, msg, tr);
     }
 
@@ -249,8 +257,8 @@ public final class Log {
      *         for Nougat (7.0) and prior releases (API <= 25), there is no
      *         tag limit of concern after this API level.
      */
-    @FastNative
-    public static native boolean isLoggable(@Nullable String tag, @Level int level);
+    //@FastNative
+    //public static native boolean isLoggable(@Nullable String tag, @Level int level);
 
     /**
      * Send a {@link #WARN} log message and log the exception.
@@ -259,7 +267,8 @@ public final class Log {
      * @param tr An exception to log.
      * @return A positive value if the message was loggable (see {@link #isLoggable}).
      */
-    public static int w(@Nullable String tag, @Nullable Throwable tr) {
+    public static int w(String tag, Throwable tr) {
+    //public static int w(@Nullable String tag, @Nullable Throwable tr) {
         return printlns(LOG_ID_MAIN, WARN, tag, "", tr);
     }
 
@@ -270,7 +279,8 @@ public final class Log {
      * @param msg The message you would like logged.
      * @return A positive value if the message was loggable (see {@link #isLoggable}).
      */
-    public static int e(@Nullable String tag, @NonNull String msg) {
+    public static int e(String tag, String msg) {
+    //public static int e(@Nullable String tag, @NonNull String msg) {
         return println_native(LOG_ID_MAIN, ERROR, tag, msg);
     }
 
@@ -282,7 +292,8 @@ public final class Log {
      * @param tr An exception to log.
      * @return A positive value if the message was loggable (see {@link #isLoggable}).
      */
-    public static int e(@Nullable String tag, @Nullable String msg, @Nullable Throwable tr) {
+    public static int e(String tag, String msg, Throwable tr) {
+    //public static int e(@Nullable String tag, @Nullable String msg, @Nullable Throwable tr) {
         return printlns(LOG_ID_MAIN, ERROR, tag, msg, tr);
     }
 
@@ -296,7 +307,8 @@ public final class Log {
      * @param msg The message you would like logged.
      * @return A positive value if the message was loggable (see {@link #isLoggable}).
      */
-    public static int wtf(@Nullable String tag, @Nullable String msg) {
+    public static int wtf(String tag, String msg) {
+    //public static int wtf(@Nullable String tag, @Nullable String msg) {
         return wtf(LOG_ID_MAIN, tag, msg, null, false, false);
     }
 
@@ -305,7 +317,8 @@ public final class Log {
      * call stack.
      * @hide
      */
-    public static int wtfStack(@Nullable String tag, @Nullable String msg) {
+    public static int wtfStack(String tag, String msg) {
+    //public static int wtfStack(@Nullable String tag, @Nullable String msg) {
         return wtf(LOG_ID_MAIN, tag, msg, null, true, false);
     }
 
@@ -316,7 +329,8 @@ public final class Log {
      * @param tr An exception to log.
      * @return A positive value if the message was loggable (see {@link #isLoggable}).
      */
-    public static int wtf(@Nullable String tag, @NonNull Throwable tr) {
+    public static int wtf(String tag, Throwable tr) {
+    //public static int wtf(@Nullable String tag, @NonNull Throwable tr) {
         return wtf(LOG_ID_MAIN, tag, tr.getMessage(), tr, false, false);
     }
 
@@ -328,12 +342,14 @@ public final class Log {
      * @param tr An exception to log.  May be null.
      * @return A positive value if the message was loggable (see {@link #isLoggable}).
      */
-    public static int wtf(@Nullable String tag, @Nullable String msg, @Nullable Throwable tr) {
+    public static int wtf(String tag, String msg, Throwable tr) {
+    //public static int wtf(@Nullable String tag, @Nullable String msg, @Nullable Throwable tr) {
         return wtf(LOG_ID_MAIN, tag, msg, tr, false, false);
     }
 
-    @UnsupportedAppUsage
-    static int wtf(int logId, @Nullable String tag, @Nullable String msg, @Nullable Throwable tr,
+    //@UnsupportedAppUsage
+    static int wtf(int logId, String tag, String msg, Throwable tr,
+    //static int wtf(int logId, @Nullable String tag, @Nullable String msg, @Nullable Throwable tr,
             boolean localStack, boolean system) {
         TerribleFailure what = new TerribleFailure(msg, tr);
         // Only mark this as ERROR, do not use ASSERT since that should be
@@ -344,7 +360,8 @@ public final class Log {
         return bytes;
     }
 
-    static void wtfQuiet(int logId, @Nullable String tag, @Nullable String msg, boolean system) {
+    static void wtfQuiet(int logId, String tag, String msg, boolean system) {
+    //static void wtfQuiet(int logId, @Nullable String tag, @Nullable String msg, boolean system) {
         TerribleFailure what = new TerribleFailure(msg, null);
         sWtfHandler.onTerribleFailure(tag, what, system);
     }
@@ -356,8 +373,9 @@ public final class Log {
      *
      * @hide
      */
-    @NonNull
-    public static TerribleFailureHandler setWtfHandler(@NonNull TerribleFailureHandler handler) {
+    //@NonNull
+    public static TerribleFailureHandler setWtfHandler(TerribleFailureHandler handler) {
+    //public static TerribleFailureHandler setWtfHandler(@NonNull TerribleFailureHandler handler) {
         if (handler == null) {
             throw new NullPointerException("handler == null");
         }
@@ -373,8 +391,9 @@ public final class Log {
      * this returns an empty string.
      * @param tr An exception to log.
      */
-    @NonNull
-    public static String getStackTraceString(@Nullable Throwable tr) {
+    //@NonNull
+    public static String getStackTraceString(Throwable tr) {
+    //public static String getStackTraceString(@Nullable Throwable tr) {
         if (tr == null) {
             return "";
         }
@@ -404,7 +423,8 @@ public final class Log {
      * @param msg The message you would like logged.
      * @return A positive value if the message was loggable (see {@link #isLoggable}).
      */
-    public static int println(@Level int priority, @Nullable String tag, @NonNull String msg) {
+    public static int println(@Level int priority, String tag, String msg) {
+    //public static int println(@Level int priority, @Nullable String tag, @NonNull String msg) {
         return println_native(LOG_ID_MAIN, priority, tag, msg);
     }
 
@@ -424,7 +444,7 @@ public final class Log {
      * @return A positive value if the message was loggable (see {@link #isLoggable}).
      * @hide
      */
-    @UnsupportedAppUsage
+    //@UnsupportedAppUsage
     public static native int println_native(int bufID, int priority, String tag, String msg);
 
     /**
@@ -442,9 +462,11 @@ public final class Log {
      * @return A positive value if the message was loggable (see {@link #isLoggable}).
      * @hide
      */
-    @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-    public static int logToRadioBuffer(@Level int priority, @Nullable String tag,
-            @Nullable String message) {
+    //@SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
+    public static int logToRadioBuffer(@Level int priority, String tag,
+                                       String message) {
+    //public static int logToRadioBuffer(@Level int priority, @Nullable String tag,
+    //        @Nullable String message) {
         return println_native(LOG_ID_RADIO, priority, tag, message);
     }
 
@@ -461,8 +483,10 @@ public final class Log {
      * @return A positive value if the message was loggable (see {@link #isLoggable}).
      * @hide
      */
-    public static int printlns(int bufID, int priority, @Nullable String tag, @NonNull String msg,
-            @Nullable Throwable tr) {
+    public static int printlns(int bufID, int priority, String tag, String msg,
+                               Throwable tr) {
+    //public static int printlns(int bufID, int priority, @Nullable String tag, @NonNull String msg,
+    //        @Nullable Throwable tr) {
         ImmediateLogWriter logWriter = new ImmediateLogWriter(bufID, priority, tag);
         // Acceptable buffer size. Get the native buffer size, subtract two zero terminators,
         // and the length of the tag.
@@ -487,11 +511,11 @@ public final class Log {
                 if (t instanceof UnknownHostException) {
                     break;
                 }
-                if (t instanceof DeadSystemException) {
-                    lbbw.println("DeadSystemException: The system died; "
-                            + "earlier logs will point to the root cause");
-                    break;
-                }
+                //if (t instanceof DeadSystemException) {
+                //    lbbw.println("DeadSystemException: The system died; "
+                //            + "earlier logs will point to the root cause");
+                //    break;
+                //}
                 t = t.getCause();
             }
             if (t == null) {

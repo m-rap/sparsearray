@@ -16,8 +16,8 @@
 
 package android.util;
 
-import android.annotation.Nullable;
-import android.compat.annotation.UnsupportedAppUsage;
+//import android.annotation.Nullable;
+//import android.compat.annotation.UnsupportedAppUsage;
 
 import com.android.internal.util.ArrayUtils;
 
@@ -53,7 +53,7 @@ import java.util.function.BiFunction;
  *
  * <p>This structure is <b>NOT</b> thread-safe.</p>
  */
-@android.ravenwood.annotation.RavenwoodKeepWholeClass
+//@android.ravenwood.annotation.RavenwoodKeepWholeClass
 public final class ArrayMap<K, V> implements Map<K, V> {
     private static final boolean DEBUG = false;
     private static final String TAG = "ArrayMap";
@@ -79,19 +79,19 @@ public final class ArrayMap<K, V> implements Map<K, V> {
     /**
      * Maximum number of entries to have in array caches.
      */
-    @UnsupportedAppUsage(maxTargetSdk = 28) // Allocations are an implementation detail.
+    //@UnsupportedAppUsage(maxTargetSdk = 28) // Allocations are an implementation detail.
     private static final int CACHE_SIZE = 10;
 
     /**
      * Special hash array value that indicates the container is immutable.
      */
-    @UnsupportedAppUsage(maxTargetSdk = 28) // Allocations are an implementation detail.
+    //@UnsupportedAppUsage(maxTargetSdk = 28) // Allocations are an implementation detail.
     static final int[] EMPTY_IMMUTABLE_INTS = new int[0];
 
     /**
      * @hide Special immutable empty ArrayMap.
      */
-    @UnsupportedAppUsage(maxTargetSdk = 28) // Use your own singleton empty map.
+    //@UnsupportedAppUsage(maxTargetSdk = 28) // Use your own singleton empty map.
     public static final ArrayMap EMPTY = new ArrayMap<>(-1);
 
     /**
@@ -100,13 +100,13 @@ public final class ArrayMap<K, V> implements Map<K, V> {
      * The first entry in the array is a pointer to the next array in the
      * list; the second entry is a pointer to the int[] hash code array for it.
      */
-    @UnsupportedAppUsage(maxTargetSdk = 28) // Allocations are an implementation detail.
+    //@UnsupportedAppUsage(maxTargetSdk = 28) // Allocations are an implementation detail.
     static Object[] mBaseCache;
-    @UnsupportedAppUsage(maxTargetSdk = 28) // Allocations are an implementation detail.
+    //@UnsupportedAppUsage(maxTargetSdk = 28) // Allocations are an implementation detail.
     static int mBaseCacheSize;
-    @UnsupportedAppUsage(maxTargetSdk = 28) // Allocations are an implementation detail.
+    //@UnsupportedAppUsage(maxTargetSdk = 28) // Allocations are an implementation detail.
     static Object[] mTwiceBaseCache;
-    @UnsupportedAppUsage(maxTargetSdk = 28) // Allocations are an implementation detail.
+    //@UnsupportedAppUsage(maxTargetSdk = 28) // Allocations are an implementation detail.
     static int mTwiceBaseCacheSize;
     /**
      * Separate locks for each cache since each can be accessed independently of the other without
@@ -116,11 +116,11 @@ public final class ArrayMap<K, V> implements Map<K, V> {
     private static final Object sTwiceBaseCacheLock = new Object();
 
     private final boolean mIdentityHashCode;
-    @UnsupportedAppUsage(maxTargetSdk = 28) // Hashes are an implementation detail. Use public key/value API.
+    //@UnsupportedAppUsage(maxTargetSdk = 28) // Hashes are an implementation detail. Use public key/value API.
     int[] mHashes;
-    @UnsupportedAppUsage(maxTargetSdk = 28) // Storage is an implementation detail. Use public key/value API.
+    //@UnsupportedAppUsage(maxTargetSdk = 28) // Storage is an implementation detail. Use public key/value API.
     Object[] mArray;
-    @UnsupportedAppUsage(maxTargetSdk = 28) // Use size()
+    //@UnsupportedAppUsage(maxTargetSdk = 28) // Use size()
     int mSize;
     private MapCollections<K, V> mCollections;
 
@@ -136,7 +136,7 @@ public final class ArrayMap<K, V> implements Map<K, V> {
         }
     }
 
-    @UnsupportedAppUsage(maxTargetSdk = 28) // Hashes are an implementation detail. Use indexOfKey(Object).
+    //@UnsupportedAppUsage(maxTargetSdk = 28) // Hashes are an implementation detail. Use indexOfKey(Object).
     int indexOf(Object key, int hash) {
         final int N = mSize;
 
@@ -175,7 +175,7 @@ public final class ArrayMap<K, V> implements Map<K, V> {
         return ~end;
     }
 
-    @UnsupportedAppUsage(maxTargetSdk = 28) // Use indexOf(null)
+    //@UnsupportedAppUsage(maxTargetSdk = 28) // Use indexOf(null)
     int indexOfNull() {
         final int N = mSize;
 
@@ -214,7 +214,7 @@ public final class ArrayMap<K, V> implements Map<K, V> {
         return ~end;
     }
 
-    @UnsupportedAppUsage(maxTargetSdk = 28) // Allocations are an implementation detail.
+    //@UnsupportedAppUsage(maxTargetSdk = 28) // Allocations are an implementation detail.
     private void allocArrays(final int size) {
         if (mHashes == EMPTY_IMMUTABLE_INTS) {
             throw new UnsupportedOperationException("ArrayMap is immutable");
@@ -240,8 +240,8 @@ public final class ArrayMap<K, V> implements Map<K, V> {
                     }
                     // Whoops!  Someone trampled the array (probably due to not protecting
                     // their access with a lock).  Our cache is corrupt; report and give up.
-                    Slog.wtf(TAG, "Found corrupt ArrayMap cache: [0]=" + array[0]
-                            + " [1]=" + array[1]);
+                    //Slog.wtf(TAG, "Found corrupt ArrayMap cache: [0]=" + array[0]
+                    //        + " [1]=" + array[1]);
                     mTwiceBaseCache = null;
                     mTwiceBaseCacheSize = 0;
                 }
@@ -267,8 +267,8 @@ public final class ArrayMap<K, V> implements Map<K, V> {
                     }
                     // Whoops!  Someone trampled the array (probably due to not protecting
                     // their access with a lock).  Our cache is corrupt; report and give up.
-                    Slog.wtf(TAG, "Found corrupt ArrayMap cache: [0]=" + array[0]
-                            + " [1]=" + array[1]);
+                    //Slog.wtf(TAG, "Found corrupt ArrayMap cache: [0]=" + array[0]
+                    //        + " [1]=" + array[1]);
                     mBaseCache = null;
                     mBaseCacheSize = 0;
                 }
@@ -283,7 +283,7 @@ public final class ArrayMap<K, V> implements Map<K, V> {
      * Make sure <b>NOT</b> to call this method with arrays that can still be modified. In other
      * words, don't pass mHashes or mArray in directly.
      */
-    @UnsupportedAppUsage(maxTargetSdk = 28) // Allocations are an implementation detail.
+    //@UnsupportedAppUsage(maxTargetSdk = 28) // Allocations are an implementation detail.
     private static void freeArrays(final int[] hashes, final Object[] array, final int size) {
         if (hashes.length == (BASE_SIZE*2)) {
             synchronized (sTwiceBaseCacheLock) {
@@ -639,7 +639,7 @@ public final class ArrayMap<K, V> implements Map<K, V> {
      * The array must already be large enough to contain the item.
      * @hide
      */
-    @UnsupportedAppUsage(maxTargetSdk = 28) // Storage is an implementation detail. Use put(K, V).
+    //@UnsupportedAppUsage(maxTargetSdk = 28) // Storage is an implementation detail. Use put(K, V).
     public void append(K key, V value) {
         int index = mSize;
         final int hash = key == null ? 0
@@ -833,7 +833,8 @@ public final class ArrayMap<K, V> implements Map<K, V> {
      * equal, the method returns false, otherwise it returns true.
      */
     @Override
-    public boolean equals(@Nullable Object object) {
+    public boolean equals(Object object) {
+    //public boolean equals(@Nullable Object object) {
         if (this == object) {
             return true;
         }

@@ -16,9 +16,9 @@
 
 package android.util;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
-import android.annotation.TestApi;
+//import android.annotation.NonNull;
+//import android.annotation.Nullable;
+//import android.annotation.TestApi;
 
 import java.util.function.Consumer;
 
@@ -30,8 +30,8 @@ import java.util.function.Consumer;
  * @param <V> Any class
  * @hide
  */
-@TestApi
-@android.ravenwood.annotation.RavenwoodKeepWholeClass
+//@TestApi
+//@android.ravenwood.annotation.RavenwoodKeepWholeClass
 public class SparseArrayMap<K, V> {
     private final SparseArray<ArrayMap<K, V>> mData = new SparseArray<>();
 
@@ -42,7 +42,8 @@ public class SparseArrayMap<K, V> {
      * (A null return can also indicate that the map previously associated null with key, if the
      * implementation supports null values.)
      */
-    public V add(int key, @NonNull K mapKey, @Nullable V obj) {
+    public V add(int key, K mapKey, V obj) {
+    //public V add(int key, @NonNull K mapKey, @Nullable V obj) {
         ArrayMap<K, V> data = mData.get(key);
         if (data == null) {
             data = new ArrayMap<>();
@@ -59,7 +60,8 @@ public class SparseArrayMap<K, V> {
     }
 
     /** Return true if the structure contains an explicit entry for the int-K pair. */
-    public boolean contains(int key, @NonNull K mapKey) {
+    public boolean contains(int key, K mapKey) {
+    //public boolean contains(int key, @NonNull K mapKey) {
         return mData.contains(key) && mData.get(key).containsKey(mapKey);
     }
 
@@ -81,8 +83,9 @@ public class SparseArrayMap<K, V> {
      *
      * @return Returns the value that was stored under the keys, or null if there was none.
      */
-    @Nullable
-    public V delete(int key, @NonNull K mapKey) {
+    //@Nullable
+    public V delete(int key, K mapKey) {
+    //public V delete(int key, @NonNull K mapKey) {
         ArrayMap<K, V> data = mData.get(key);
         if (data != null) {
             return data.remove(mapKey);
@@ -101,8 +104,9 @@ public class SparseArrayMap<K, V> {
     /**
      * Get the value associated with the int-K pair.
      */
-    @Nullable
-    public V get(int key, @NonNull K mapKey) {
+    //@Nullable
+    public V get(int key, K mapKey) {
+    //public V get(int key, @NonNull K mapKey) {
         ArrayMap<K, V> data = mData.get(key);
         if (data != null) {
             return data.get(mapKey);
@@ -114,8 +118,9 @@ public class SparseArrayMap<K, V> {
      * Returns the value to which the specified key and mapKey are mapped, or defaultValue if this
      * map contains no mapping for them.
      */
-    @Nullable
-    public V getOrDefault(int key, @NonNull K mapKey, V defaultValue) {
+    //@Nullable
+    public V getOrDefault(int key, K mapKey, V defaultValue) {
+    //public V getOrDefault(int key, @NonNull K mapKey, V defaultValue) {
         if (mData.contains(key)) {
             ArrayMap<K, V> data = mData.get(key);
             if (data != null && data.containsKey(mapKey)) {
@@ -135,7 +140,8 @@ public class SparseArrayMap<K, V> {
      *
      * @see SparseArray#indexOfKey
      */
-    public int indexOfKey(int key, @NonNull K mapKey) {
+    public int indexOfKey(int key, K mapKey) {
+    //public int indexOfKey(int key, @NonNull K mapKey) {
         ArrayMap<K, V> data = mData.get(key);
         if (data != null) {
             return data.indexOfKey(mapKey);
@@ -149,7 +155,7 @@ public class SparseArrayMap<K, V> {
     }
 
     /** Returns the map's key at the given mapIndex for the given keyIndex. */
-    @NonNull
+    //@NonNull
     public K keyAt(int keyIndex, int mapIndex) {
         return mData.valueAt(keyIndex).keyAt(mapIndex);
     }
@@ -175,13 +181,14 @@ public class SparseArrayMap<K, V> {
     }
 
     /** Returns the value V at the given key and map index. */
-    @Nullable
+    //@Nullable
     public V valueAt(int keyIndex, int mapIndex) {
         return mData.valueAt(keyIndex).valueAt(mapIndex);
     }
 
     /** Iterate through all int-K pairs and operate on all of the values. */
-    public void forEach(@NonNull Consumer<V> consumer) {
+    public void forEach(Consumer<V> consumer) {
+    //public void forEach(@NonNull Consumer<V> consumer) {
         for (int i = numMaps() - 1; i >= 0; --i) {
             ArrayMap<K, V> data = mData.valueAt(i);
             for (int j = data.size() - 1; j >= 0; --j) {
@@ -204,7 +211,8 @@ public class SparseArrayMap<K, V> {
      * Iterate through all int-K pairs and operate on all of the values.
      * @hide
      */
-    public void forEach(@NonNull TriConsumer<K, V> consumer) {
+    public void forEach(TriConsumer<K, V> consumer) {
+    //public void forEach(@NonNull TriConsumer<K, V> consumer) {
         for (int iIdx = numMaps() - 1; iIdx >= 0; --iIdx) {
             final int i = mData.keyAt(iIdx);
             final ArrayMap<K, V> data = mData.valueAt(iIdx);

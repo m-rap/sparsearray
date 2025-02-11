@@ -16,9 +16,9 @@
 
 package android.util;
 
-import android.annotation.Nullable;
-import android.compat.annotation.UnsupportedAppUsage;
-
+//import android.annotation.Nullable;
+//import android.compat.annotation.UnsupportedAppUsage;
+//
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.GrowingArrayUtils;
 
@@ -54,16 +54,16 @@ import java.util.Objects;
  * keys in ascending order. In the case of <code>valueAt(int)</code>, the
  * values corresponding to the keys are returned in ascending order.
  */
-@android.ravenwood.annotation.RavenwoodKeepWholeClass
+//@android.ravenwood.annotation.RavenwoodKeepWholeClass
 public class SparseArray<E> implements Cloneable {
     private static final Object DELETED = new Object();
     private boolean mGarbage = false;
 
-    @UnsupportedAppUsage(maxTargetSdk = 28) // Use keyAt(int)
+    //@UnsupportedAppUsage(maxTargetSdk = 28) // Use keyAt(int)
     private int[] mKeys;
-    @UnsupportedAppUsage(maxTargetSdk = 28) // Use valueAt(int), setValueAt(int, E)
+    //@UnsupportedAppUsage(maxTargetSdk = 28) // Use valueAt(int), setValueAt(int, E)
     private Object[] mValues;
-    @UnsupportedAppUsage(maxTargetSdk = 28) // Use size()
+    //@UnsupportedAppUsage(maxTargetSdk = 28) // Use size()
     private int mSize;
 
     /**
@@ -514,7 +514,8 @@ public class SparseArray<E> implements Cloneable {
      * For backwards compatibility reasons, {@link Object#equals(Object)} cannot be implemented,
      * so this serves as a manually invoked alternative.
      */
-    public boolean contentEquals(@Nullable SparseArray<?> other) {
+    //public boolean contentEquals(@Nullable SparseArray<?> other) {
+    public boolean contentEquals(SparseArray<?> other) {
         if (other == null) {
             return false;
         }

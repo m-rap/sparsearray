@@ -27,7 +27,7 @@ import java.util.Arrays;
  *
  * Note: this class is not thread-safe.
  */
-@android.ravenwood.annotation.RavenwoodKeepWholeClass
+//@android.ravenwood.annotation.RavenwoodKeepWholeClass
 public class LineBreakBufferedWriter extends PrintWriter {
 
     /**

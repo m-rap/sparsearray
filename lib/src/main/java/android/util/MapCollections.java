@@ -16,7 +16,7 @@
 
 package android.util;
 
-import android.annotation.Nullable;
+//import android.annotation.Nullable;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
@@ -31,7 +31,7 @@ import java.util.Set;
  * structure like {@link ArrayMap}.
  * @hide
  */
-@android.ravenwood.annotation.RavenwoodKeepWholeClass
+//@android.ravenwood.annotation.RavenwoodKeepWholeClass
 abstract class MapCollections<K, V> {
     EntrySet mEntrySet;
     KeySet mKeySet;
@@ -252,7 +252,8 @@ abstract class MapCollections<K, V> {
         }
 
         @Override
-        public boolean equals(@Nullable Object object) {
+        public boolean equals(Object object) {
+        //public boolean equals(@Nullable Object object) {
             return equalsSetHelper(this, object);
         }
 
@@ -342,7 +343,8 @@ abstract class MapCollections<K, V> {
         }
 
         @Override
-        public boolean equals(@Nullable Object object) {
+        public boolean equals(Object object) {
+        //public boolean equals(@Nullable Object object) {
             return equalsSetHelper(this, object);
         }
 
