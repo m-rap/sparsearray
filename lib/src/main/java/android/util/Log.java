@@ -445,7 +445,11 @@ public final class Log {
      * @hide
      */
     //@UnsupportedAppUsage
-    public static native int println_native(int bufID, int priority, String tag, String msg);
+    //public static native int println_native(int bufID, int priority, String tag, String msg);
+    public static int println_native(int bufID, int priority, String tag, String msg) {
+        System.out.println(tag + ": " + msg);
+        return msg.length();
+    }
 
     /**
      * Send a log message to the "radio" log buffer, which can be dumped with
