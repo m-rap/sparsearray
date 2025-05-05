@@ -20,7 +20,7 @@ public class StringUtil {
     return sb.toString();
   }
 
-  public static String numJoin(String delimiter, ArrayList<? extends Number> list) {
+  public static String numJoin(String delimiter, List<? extends Number> list) {
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < list.size(); i++) {
       sb.append(list.get(i));
